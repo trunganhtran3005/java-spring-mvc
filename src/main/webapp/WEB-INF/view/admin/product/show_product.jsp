@@ -32,30 +32,32 @@
                                     <div class="col-12 mx-auto">
                                         <div class="d-flex justify-content-between">
                                             <h3>Table Product</h3>
-                                            <a href="/admin/user/create" class="btn btn-primary">Create a User</a>
+                                            <a href="/admin/product/create" class="btn btn-primary">Create a Product</a>
                                         </div>
                                         <hr>
                                         <table class="table table-bordered table-hover">
 
                                             <tr>
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">fullName</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Factory</th>
                                                 <th scope="col">Action</th>
                                             </tr>
 
                                             <tbody>
-                                                <c:forEach var="user" items="${users1}">
+                                                <c:forEach var="product" items="${product}">
                                                     <tr>
-                                                        <th>${user.id}</th>
-                                                        <td>${user.email}</td>
-                                                        <td>${user.fullName}</td>
+                                                        <th>${product.id}</th>
+                                                        <td>${product.name}</td>
+                                                        <td>${product.price}</td>
+                                                        <td>${product.factory}</td>
                                                         <td>
-                                                            <a href="/admin/user/${user.id}"
+                                                            <a href="/admin/product/${product.id}"
                                                                 class="btn btn-success">View</a>
-                                                            <a href="/admin/user/update/${user.id}"
+                                                            <a href="/admin/product/update/${product.id}"
                                                                 class="btn btn-warning">Update</a>
-                                                            <a href="/admin/user/delete/${user.id}"
+                                                            <a href="/admin/product/delete/${product.id}"
                                                                 class="btn btn-danger">Delete</a>
                                                         </td>
                                                     </tr>
