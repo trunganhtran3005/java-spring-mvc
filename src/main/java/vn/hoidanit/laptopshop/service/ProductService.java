@@ -18,4 +18,18 @@ public class ProductService {
     public List<Product> getAllProduct() {
         return this.productRepository.findAll();
     }
+
+    public Product handleSaveProduct(Product product) {
+        Product trung = this.productRepository.save(product);
+        System.out.println(trung);
+        return trung;
+    }
+
+    public Product getProductbyID(long id) {
+        return this.productRepository.findById(id);
+    }
+
+    public void deleteProductById(long id) {
+        this.productRepository.deleteById(id);
+    }
 }

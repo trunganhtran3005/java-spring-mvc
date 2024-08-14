@@ -71,21 +71,24 @@ public class UserController {
     // button_create_user
     @PostMapping("/admin/user/create")
     public String create(Model model, @ModelAttribute("newUser") @Valid User anhtrung,
-            BindingResult bindingResult,
+            BindingResult newUserbindingResult,
             @RequestParam("file") MultipartFile file) {
-
-        // validate
-        List<FieldError> errors = bindingResult.getFieldErrors();
+        List<FieldError> errors = newUserbindingResult.getFieldErrors();
         for (FieldError error : errors) {
-            System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+            System.out.println(">>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        }
+        // validate
+        if (newUserbindingResult.hasErrors()) {
+            return "admin/user/create";
+        } else {
+            String avatar = this.UploadService.handleUploadFile(file, "avatar");
+            String hashpassword = this.passwordEncoder.encode(anhtrung.getPassword());
+            anhtrung.setAvatar(avatar);
+            anhtrung.setPassword(hashpassword);
+            anhtrung.setRole(this.userService.getRolebyName(anhtrung.getRole().getName()));
+            this.userService.handleSaveUser(anhtrung);
         }
         //
-        String avatar = this.UploadService.handleUploadFile(file, "avatar");
-        String hashpassword = this.passwordEncoder.encode(anhtrung.getPassword());
-        anhtrung.setAvatar(avatar);
-        anhtrung.setPassword(hashpassword);
-        anhtrung.setRole(this.userService.getRolebyName(anhtrung.getRole().getName()));
-        this.userService.handleSaveUser(anhtrung);
 
         return "redirect:/admin/user";
     }

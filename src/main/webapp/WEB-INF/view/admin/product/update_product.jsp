@@ -18,6 +18,12 @@
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+                        const orgImage = "${newProduct.image}";
+                        if (orgImage) {
+                            const urlImage = "/images/product/" + orgImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
@@ -36,18 +42,21 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Create Product</h1>
+                                <h1 class="mt-4">Update Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active">Product</li>
                                 </ol>
                                 <div>
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a Product</h3>
+                                            <h3>Update a Product</h3>
                                             <hr />
-                                            <form:form method="post" action="/admin/product/create"
-                                                modelAttribute="newProduct" class="row g-3"
-                                                enctype="multipart/form-data">
+                                            <form:form method="post" action="/admin/product/update"
+                                                modelAttribute="newProduct" class="row g-3">
+                                                <div class="mb-3" style="display: none;">
+                                                    <label class="form-label">ID:</label>
+                                                    <form:input path="id" type="text" class="form-control" />
+                                                </div>
                                                 <div class="col-md-6">
                                                     <c:set var="errorName">
                                                         <form:errors path="name" cssClass="invalid-feedback" />
@@ -114,11 +123,11 @@
                                                         accept=".png, .jpg, .jpeg" name="file" />
                                                 </div>
                                                 <div class="col-12 mb-3">
-                                                    <img style="max-height: 250px;display: none;" id="avatarPreview"
+                                                    <img style="max-height: 250px; display: none;" id="avatarPreview"
                                                         alt="avatar Preview">
                                                 </div>
                                                 <div class="col-12 mb-5">
-                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
                                                 </div>
 
                                             </form:form>
