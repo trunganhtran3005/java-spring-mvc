@@ -33,6 +33,8 @@
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
+                                            <img class="card-img-top" src="/images/avatar/${user.avatar}"
+                                                alt="card image cap" />
                                             <div class="d-flex justify-content-between">
                                                 <h3>User Detail with id = ${id}</h3>
                                             </div>
